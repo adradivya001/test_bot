@@ -1,0 +1,49 @@
+{
+  "help_menu_welcome": "👋 *DFO हॉस्पिटल* में आपका स्वागत है।\n\nमैं आपका डिजिटल असिस्टेंट हूँ। कृपया नीचे दिए गए बटन पर क्लिक करें या अपना सवाल टाइप करें (जैसे, 'अपॉइंटमेंट बुक करना है' या 'रिपोर्ट देखनी है'):",
+  "help_menu_btn_book": "अपॉइंटमेंट बुक करें",
+  "help_menu_btn_report": "रिपोर्ट चेक करें",
+  "help_menu_btn_support": "मदद के लिए बात करें",
+  
+  "language_selection_welcome": "कृपया अपनी भाषा चुनें / Please select your language / దయచేసి మీ భాషను ఎంచుకోండి:",
+  "language_changed_success": "✅ आपकी भाषा अब *हिन्दी* है। आज हम आपकी क्या मदद कर सकते हैं?",
+  
+  "select_department_title": "कृपया अपॉइंटमेंट के लिए डिपार्टमेंट चुनें:",
+  "select_department_btn": "डिपार्टमेंट चुनें",
+  "select_department_sec": "डिपार्टमेंट लिस्ट",
+  "select_doctor_title": "कृपया अपॉइंटमेंट के लिए डॉक्टर चुनें:",
+  "select_doctor_btn": "डॉक्टर चुनें",
+  "select_doctor_sec": "डॉक्टर लिस्ट",
+  
+  "select_date_title": "आपने चुना: *{doctorName}*।\n\nकृपया तारीख चुनें:",
+  "select_date_btn": "तारीख चुनें",
+  "select_date_sec": "तारीख लिस्ट",
+  
+  "select_slot_title": "आपने चुना: *{date}*।\n\nकृपया टाइम (स्लॉट) चुनें:",
+  "select_slot_btn": "टाइम चुनें",
+  "select_slot_sec": "टाइम लिस्ट",
+  
+  "booking_confirmed": "✅ *अपॉइंटमेंट बुक हो गया है!*\n\n• *अपॉइंटमेंट आईडी:* {appointmentId}\n• *डॉक्टर:* {doctorName}\n• *तारीख:* {date}\n• *समय:* {time}\n\nकृपया अपने टाइम से 15 मिनट पहले हॉस्पिटल पहुँचें। धन्यवाद।",
+  "booking_failed": "❌ बुकिंग नहीं हो पाई: {message}। शुरू से करने के लिए \"exit\" भेजें।",
+  "slot_conflict": "⚠️ {message}\n\n📋 {date} के लिए शेष उपलब्ध स्लॉट यहाँ हैं:",
+  "slot_conflict_no_slots": "⚠️ {message}\n\n❌ दुर्भाग्य से, इस तारीख के लिए कोई और स्लॉट उपलब्ध नहीं है। कृपया कोई और तारीख चुनें।",
+  "patient_registration_required": "📋 *रजिस्ट्रेशन (पंजीकरण) की जरूरत है*\n\nआप अभी हमारे सिस्टम में रजिस्टर्ड नहीं हैं। रजिस्ट्रेशन के लिए कृपया नीचे दिए गए फॉर्मेट में अपनी जानकारी भेजें:\n\n*FirstName LastName Gender Age YYYY-MM-DD*\n(जैसे: John Doe Male 30 1996-01-01)",
+  "patient_registration_invalid": "❌ गलत फॉर्मेट। कृपया जानकारी बिल्कुल इस तरह लिखकर भेजें:\n*FirstName LastName Gender Age YYYY-MM-DD*\n\n(जैसे: John Doe Male 30 1996-01-01)",
+  
+  "avail_select_department_title": "डॉक्टर की उपलब्धता चेक करने के लिए डिपार्टमेंट चुनें:",
+  "avail_select_doctor_title": "डॉक्टर की उपलब्धता चेक करने के लिए डॉक्टर चुनें:",
+  "avail_select_date_title": "उपलब्धता चेक करने के लिए तारीख चुनें:",
+  "doctor_available": "✅ *{doctorName}* उपलब्ध हैं।\n\n*खाली स्लॉट (समय):*\n{slots}\n\nअगर आप अपॉइंटमेंट बुक करना चाहते हैं तो \"book\" लिखकर भेजें।",
+  "doctor_unavailable": "❌ *{doctorName}* इस तारीख को उपलब्ध नहीं हैं। कृपया किसी और दिन के लिए चेक करें।",
+  
+  "report_ready": "📊 *लैब रिपोर्ट: तैयार है (READY)*\n\n• *रिपोर्ट आईडी:* {reportId}\n• *रिपोर्ट टाइप:* {reportType}\n• *तारीख:* {createdAt}\n\n📥 *रिपोर्ट यहाँ से डाउनलोड करें:* {downloadUrl}",
+  "report_pending": "⏳ *लैब रिपोर्ट: काम चल रहा है (IN PROGRESS)*\n\nआपकी रिपोर्ट अभी तैयार हो रही है। तैयार होने पर हम आपको मैसेज भेज देंगे। अनुमानित समय (ETA): {eta}",
+  "report_not_found": "❌ *रिपोर्ट नहीं मिली*\n\nहमें आपके इस फ़ोन नंबर पर कोई रिपोर्ट नहीं मिली।\n\nकृपया अपना नंबर दोबारा चेक करें और फिर से कोशिश करें।",
+  
+  "kb_answer_fallback": "माफ़ करें, मुझे इसकी जानकारी नहीं मिल पाई। आपको हमारे हेल्प एजेंट से कनेक्ट किया जा रहा है...",
+  
+  "escalation_ticket_created": "💁‍♂️ *हेल्प एजेंट से कनेक्शन*\n\n• *टिकट आईडी:* {ticketId}\n• *स्टेटस:* {status}\n• *प्रायोरिटी:* {priority}\n• *एजेंट:* {assignedAgent}\n\nहम आपको लाइव एजेंट से कनेक्ट कर रहे हैं। वे आपसे यहाँ चैट करेंगे।",
+  "escalation_ticket_mock": "💁‍♂️ *हेल्प एजेंट से कनेक्शन*\n\n{message}",
+  "escalation_locked_session": "आप अभी लाइव एजेंट के साथ चैट कर रहे हैं। ऑटोमेटेड मैसेज अभी बंद हैं।",
+  
+  "session_error": "सिस्टम एरर। कृपया दोबारा कोशिश करें।"
+}

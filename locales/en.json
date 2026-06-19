@@ -1,0 +1,49 @@
+{
+  "help_menu_welcome": "👋 Welcome to *DFO Patient Engagement Portal*.\n\nI am your virtual assistant. Please select an option below or type a query (e.g., 'Book appointment', 'Report status'):",
+  "help_menu_btn_book": "Book Appointment",
+  "help_menu_btn_report": "Check Report Status",
+  "help_menu_btn_support": "Speak to Support",
+  
+  "language_selection_welcome": "Please select your preferred language / कृपया अपनी पसंदीदा भाषा चुनें / దయచేసి మీ ప్రాధాన్య భాషను ఎంచుకోండి:",
+  "language_changed_success": "✅ Language updated to *English*. How can we help you today?",
+  
+  "select_department_title": "Please select a department to schedule your appointment:",
+  "select_department_btn": "Choose Department",
+  "select_department_sec": "Available Departments",
+  "select_doctor_title": "Please select a doctor to schedule your appointment:",
+  "select_doctor_btn": "Choose Doctor",
+  "select_doctor_sec": "Available Doctors",
+  
+  "select_date_title": "You selected: *{doctorName}*.\n\nPlease select a date:",
+  "select_date_btn": "Select Date",
+  "select_date_sec": "Available Dates",
+  
+  "select_slot_title": "You selected: *{date}*.\n\nPlease choose an available time slot:",
+  "select_slot_btn": "Select Slot",
+  "select_slot_sec": "Available Slots",
+  
+  "booking_confirmed": "✅ *Appointment Confirmed!*\n\n• *Appointment ID:* {appointmentId}\n• *Doctor:* {doctorName}\n• *Date:* {date}\n• *Time:* {time}\n\nPlease arrive 15 minutes before your scheduled time. Thank you for choosing DFO.",
+  "booking_failed": "❌ Booking failed: {message}. Please send \"exit\" to restart.",
+  "slot_conflict": "⚠️ {message}\n\n📋 Here are the remaining available slots for {date}:",
+  "slot_conflict_no_slots": "⚠️ {message}\n\n❌ Unfortunately, there are no more available slots for this date. Please try a different date.",
+  "patient_registration_required": "📋 *Patient Registration Required*\n\nYou are not registered in our system. Please reply with your details in this format to register:\n\n*FirstName LastName Gender Age YYYY-MM-DD*\n(e.g. John Doe Male 30 1996-01-01)",
+  "patient_registration_invalid": "❌ Invalid format. Please enter details exactly as:\n*FirstName LastName Gender Age YYYY-MM-DD*\n\n(e.g., John Doe Male 30 1996-01-01)",
+  
+  "avail_select_department_title": "Please select a department to check doctor availability:",
+  "avail_select_doctor_title": "Please select a doctor to check their availability:",
+  "avail_select_date_title": "Please select a date to check availability:",
+  "doctor_available": "✅ *{doctorName}* is available.\n\n*Available Slots:*\n{slots}\n\nReply with \"book\" if you would like to start booking an appointment.",
+  "doctor_unavailable": "❌ *{doctorName}* is currently not accepting appointments on this date. Please check back later.",
+  
+  "report_ready": "📊 *Lab Report Status: READY*\n\n• *Report ID:* {reportId}\n• *Report Type:* {reportType}\n• *Created At:* {createdAt}\n\n📥 *Download Report:* {downloadUrl}",
+  "report_pending": "⏳ *Lab Report Status: IN PROGRESS*\n\nYour test results are still being processed. We will notify you once they are ready. ETA: {eta}",
+  "report_not_found": "❌ *Lab Report Status: NOT FOUND*\n\nWe could not find a report matching your phone number.\n\nPlease double check your details and try again.",
+  
+  "kb_answer_fallback": "Sorry, I couldn't find specific details for that. Redirecting you to human support...",
+  
+  "escalation_ticket_created": "💁‍♂️ *Live Support Escalation*\n\n• *Ticket ID:* {ticketId}\n• *Status:* {status}\n• *Priority:* {priority}\n• *Assigned Agent:* {assignedAgent}\n\nConnecting you to a live support representative. They will chat with you here shortly.",
+  "escalation_ticket_mock": "💁‍♂️ *Live Support Escalation*\n\n{message}",
+  "escalation_locked_session": "User is currently in an escalated session. Automated messages are temporarily disabled.",
+  
+  "session_error": "Session error. Please try again."
+}
