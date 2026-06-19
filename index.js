@@ -46,16 +46,24 @@ app.post('/api/simulator/send', (req, res) => {
   messageController.handleSimulatorMessage(req, res);
 });
 
-// Internal endpoint to send messages manually
+// Internal endpoint to send messages manually (supports x-tenant-id / phoneNumberId routing)
 app.post('/v1/send-message', async (req, res) => {
-  const { to, text } = req.body;
+  const { to, text, phoneNumberId } = req.body;
+  const targetPhoneId = phoneNumberId || req.headers['x-phone-number-id'] || env.META_PHONE_NUMBER_ID;
+
   if (!to || !text) {
     return res.status(400).json({ success: false, error: 'Missing to or text in body' });
   }
 
   try {
-    const result = await whatsappClient.sendText(to, text);
-    res.status(200).json({ success: true, result });
+    const { getTenantConfig } = require('./shared/tenantCache');
+    const { runWithTenantConfig } = require('./shared/tenantContext');
+    const tenantConfig = await getTenantConfig(targetPhoneId);
+
+    await runWithTenantConfig(tenantConfig, async () => {
+      const result = await whatsappClient.sendText(to, text);
+      res.status(200).json({ success: true, result });
+    });
   } catch (error) {
     logger.error('Failed to send outbound message via manual endpoint', { error: error.message });
     res.status(500).json({ success: false, error: error.message });

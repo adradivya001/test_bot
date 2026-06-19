@@ -4,15 +4,20 @@ const { logger } = require('../logger/logger');
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
+const { getTenantConfig } = require('../shared/tenantContext');
 
 class WhatsAppClient {
   get baseUrl() {
-    return `https://graph.facebook.com/v19.0/${env.META_PHONE_NUMBER_ID}`;
+    const config = getTenantConfig();
+    const phoneId = config?.phoneNumberId || env.META_PHONE_NUMBER_ID;
+    return `https://graph.facebook.com/v19.0/${phoneId}`;
   }
 
   get headers() {
+    const config = getTenantConfig();
+    const token = config?.accessToken || env.META_ACCESS_TOKEN;
     return {
-      'Authorization': `Bearer ${env.META_ACCESS_TOKEN}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
   }
@@ -20,8 +25,18 @@ class WhatsAppClient {
   async sendPostRequest(endpoint, payload) {
     const url = `${this.baseUrl}${endpoint}`;
     
-    // Check for mock environment values to avoid crashing/rate limits in offline testing
-    if (env.META_ACCESS_TOKEN === 'mock_access_token' || env.META_PHONE_NUMBER_ID === 'mock_phone_number_id') {
+    // Resolve the actual tokens being used for this specific request
+    const config = getTenantConfig();
+    const activeToken = config?.accessToken || env.META_ACCESS_TOKEN;
+    const activePhoneId = config?.phoneNumberId || env.META_PHONE_NUMBER_ID;
+
+    // Check if the ACTIVE tenant credentials are mock values
+    if (
+      activeToken === 'mock_access_token' || 
+      activePhoneId === 'mock_phone_number_id' || 
+      !activeToken || 
+      !activePhoneId
+    ) {
       logger.debug(`Mock WhatsApp Client: Skipping real Graph API call. Payload:`, payload);
       return { data: { messages: [{ id: 'mock_msg_' + Math.random().toString(36).substring(7) }] } };
     }

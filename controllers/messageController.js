@@ -52,12 +52,27 @@ class MessageController {
     res.status(200).send('EVENT_RECEIVED');
 
     try {
-      const messages = this.normalizeMetaPayload(body);
-      if (messages.length === 0) return;
+      const phoneNumberId = body.entry?.[0]?.changes?.[0]?.value?.metadata?.phone_number_id;
+      let tenantConfig = null;
 
-      for (const msg of messages) {
-        // Deduplication
-        if (processedMessageIds.has(msg.messageId)) {
+      if (phoneNumberId) {
+        try {
+          const { getTenantConfig } = require('../shared/tenantCache');
+          tenantConfig = await getTenantConfig(phoneNumberId);
+        } catch (err) {
+          logger.error('Failed to lookup tenant via caching utility', err.message);
+        }
+      }
+
+      const { runWithTenantConfig } = require('../shared/tenantContext');
+
+      runWithTenantConfig(tenantConfig, async () => {
+        const messages = this.normalizeMetaPayload(body);
+        if (messages.length === 0) return;
+
+        for (const msg of messages) {
+          // Deduplication
+          if (processedMessageIds.has(msg.messageId)) {
           logger.info(`Ignoring duplicate message ID: ${msg.messageId}`);
           continue;
         }
@@ -76,6 +91,7 @@ class MessageController {
         // Send responses back to patient via WhatsApp API client
         await this.sendOutgoingResponses(msg.phone, result.response);
       }
+      });
     } catch (error) {
       logger.error('Error handling Meta Webhook POST', { error });
     }
@@ -102,16 +118,33 @@ class MessageController {
     };
 
     try {
-      const session = await sessionService.getSession(simulatedMessage.phone);
-      const result = await workflowRouter.routeMessage(simulatedMessage, session);
-      await sessionService.updateSession(simulatedMessage.phone, result.session);
+      const { env } = require('../config/env');
+      const targetPhoneId = req.body.phoneNumberId || env.META_PHONE_NUMBER_ID;
+      let tenantConfig = null;
 
-      // Return responses and updated session
-      const responseList = Array.isArray(result.response) ? result.response : [result.response];
-      res.status(200).json({
-        success: true,
-        responses: responseList.filter(Boolean),
-        session: result.session
+      if (targetPhoneId) {
+        try {
+          const { getTenantConfig } = require('../shared/tenantCache');
+          tenantConfig = await getTenantConfig(targetPhoneId);
+        } catch (err) {
+          logger.error('Failed to lookup tenant for simulator via caching utility', err.message);
+        }
+      }
+
+      const { runWithTenantConfig } = require('../shared/tenantContext');
+
+      runWithTenantConfig(tenantConfig, async () => {
+        const session = await sessionService.getSession(simulatedMessage.phone);
+        const result = await workflowRouter.routeMessage(simulatedMessage, session);
+        await sessionService.updateSession(simulatedMessage.phone, result.session);
+
+        // Return responses and updated session
+        const responseList = Array.isArray(result.response) ? result.response : [result.response];
+        res.status(200).json({
+          success: true,
+          responses: responseList.filter(Boolean),
+          session: result.session
+        });
       });
     } catch (error) {
       logger.error('Error handling simulator message', { error });
